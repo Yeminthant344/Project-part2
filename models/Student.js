@@ -1,7 +1,8 @@
 class Student {
-    constructor(name, description) {
+    constructor(name, Address, Gender) {
         this.name = name;
-        this.description = description;
+        this.Address = Address;
+        this.Gender = Gender;
 
         const Enroll = new Date().getTime();
         const random = Math.floor(Math.random() * 1000);

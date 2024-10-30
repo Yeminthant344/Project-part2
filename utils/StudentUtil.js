@@ -18,13 +18,14 @@ async function writeJSON(object, filename) {
 async function addStudent(req, res) {
     try {
         const name = req.body.name;
-        const description = req.body.description;
+        const Address = req.body.Address;
+        const Gender = req.body.Gender;
 
         // Validation checks
-        if (description.length < 6) {
+        if (Address.length < 6) {
             return res.status(400).json({ message: 'Validation error: description too short' });
         } else {
-            const newStudent = new Student(name, description);
+            const newStudent = new Student(name, Address, Gender);
             const updatedStudents = await writeJSON(newStudent, 'utils/students.json');
             return res.status(201).json(updatedStudents);
         }
