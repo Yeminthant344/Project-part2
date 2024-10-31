@@ -1,11 +1,16 @@
 var express = require('express');
 var bodyParser = require("body-parser");
 var app = express();
+
 const PORT = process.env.PORT || 5050
 var startPage = "index.html";
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("./public"));
+
+const { addStudent } = require('./utils/StudentUtil')
+app.post('/add-Student', addStudent);
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);
 })
