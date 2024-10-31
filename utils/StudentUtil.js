@@ -34,6 +34,34 @@ async function addStudent(req, res) {
     }
 }
 
+async function editStudent(req, res) {
+    try {
+        const id = req.params.id;
+        const name = req.body.name;
+        const Address = req.body.Address;
+        const Gender = req.body.Gender;
+        const allStudents = await readJSON('utils/students.json');
+        var modified = false;
+        for (var i = 0; i < allStudents.length; i++) {
+            var curcurrStudent = allStudents[i];
+            if (curcurrStudent.id == id) {
+                allStudents[i].name = name;
+                allStudents[i].Address = Address;
+                allStudents[i].Gender = Gender;
+                modified = true;
+            }
+        }
+        if (modified) {
+            await fs.writeFile('utils/students.json', JSON.stringify(allStudents), 'utf8');
+            return res.status(201).json({ message: 'Student modified successfully!' });
+        } else {
+            return res.status(500).json({ message: 'Error occurred, unable to modify!' });
+        }
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
+
 module.exports = {
-    readJSON, writeJSON, addStudent
+    readJSON, writeJSON, addStudent,  editStudent
 };
