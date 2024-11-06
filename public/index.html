@@ -1,12 +1,105 @@
-<html>
+<!DOCTYPE html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DVOPS - Student Management Web</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="js/student.js"></script>
 </head>
 
 <body>
-    Welcome to My Grp Student Management Web. In this application, users
-    will get to manage Students.
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <img src="images/logo.png">
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#studentModal">
+                    Add Student
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="studentModal" tabindex="-1" role="dialog" arialabelledby="studentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="studentModalLabel">Add New Student</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Student Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter name">
+                        </div>
+                        <div class="form-group">
+                            <label for="Address">Address</label>
+                            <input type="text" class="form-control" id="Address" placeholder="Enter Address">
+                        </div>
+                        <div class="form-group">
+                            <label for="Gender">Gender</label>
+                            <input type="text" class="form-control" id="Gender" placeholder="Enter Gender">
+                        </div>
+                        <p align="right" id="message" class=""></p>
+                    </form>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" datadismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="addStudent()">Add New Student</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editstudentModal" tabindex="-1" role="dialog" arialabelledby="editstudentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editResourceModalLabel">Edit Student</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="editName" placeholder="Enter name">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Address</label>
+                            <input type="text" class="form-control" id="editAddress" placeholder="Enter Address">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Gender</label>
+                            <input type="text" class="form-control" id="editGender" placeholder="Enter Gender">
+                        </div>
+                        <p align="right" id="editMessage" class=""></p>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="updateButton" onclick="">Update Student</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
