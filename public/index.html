@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,9 +27,8 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="studentModal" tabindex="-1" role="dialog" arialabelledby="studentModalLabel"
-        aria-hidden="true">
+    <!-- Add Student Modal -->
+    <div class="modal fade" id="studentModal" tabindex="-1" role="dialog" aria-labelledby="studentModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -47,25 +45,57 @@
                         </div>
                         <div class="form-group">
                             <label for="Address">Address</label>
-                            <input type="text" class="form-control" id="Address"
-                                placeholder="Enter Address">
+                            <input type="text" class="form-control" id="Address" placeholder="Enter Address">
                         </div>
                         <div class="form-group">
                             <label for="Gender">Gender</label>
-                            <input type="text" class="form-control" id="Gender"
-                                placeholder="Enter Gender">
+                            <input type="text" class="form-control" id="Gender" placeholder="Enter Gender">
                         </div>
                         <p align="right" id="message" class=""></p>
                     </form>
                 </div>
                 <div class="modal-footer">
-
-                    <button type="button" class="btn btn-secondary" datadismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" onclick="addStudent()">Add New Student</button>
                 </div>
             </div>
         </div>
     </div>
-</body>
 
+    <!-- Edit Student Modal -->
+    <div class="modal fade" id="editstudentModal" tabindex="-1" role="dialog" aria-labelledby="editstudentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editstudentModalLabel">Edit Student</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="editName">Name</label>
+                            <input type="text" class="form-control" id="editName" placeholder="Enter name">
+                        </div>
+                        <div class="form-group">
+                            <label for="editAddress">Address</label>
+                            <input type="text" class="form-control" id="editAddress" placeholder="Enter Address">
+                        </div>
+                        <div class="form-group">
+                            <label for="editGender">Gender</label>
+                            <input type="text" class="form-control" id="editGender" placeholder="Enter Gender">
+                        </div>
+                        <p align="right" id="editMessage" class=""></p>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="updateButton" onclick="updateStudent()">Update Student</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
 </html>
