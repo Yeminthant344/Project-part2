@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,8 +28,9 @@
         </div>
     </div>
 
-    <!-- Add Student Modal -->
-    <div class="modal fade" id="studentModal" tabindex="-1" role="dialog" aria-labelledby="studentModalLabel" aria-hidden="true">
+    <!-- Modal -->
+    <div class="modal fade" id="studentModal" tabindex="-1" role="dialog" arialabelledby="studentModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -55,19 +57,21 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    <button type="button" class="btn btn-secondary" datadismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" onclick="addStudent()">Add New Student</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Edit Student Modal -->
-    <div class="modal fade" id="editstudentModal" tabindex="-1" role="dialog" aria-labelledby="editstudentModalLabel" aria-hidden="true">
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editstudentModal" tabindex="-1" role="dialog" arialabelledby="editstudentModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editstudentModalLabel">Edit Student</h5>
+                    <h5 class="modal-title" id="editResourceModalLabel">Edit Student</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -75,15 +79,15 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="editName">Name</label>
+                            <label for="name">Name</label>
                             <input type="text" class="form-control" id="editName" placeholder="Enter name">
                         </div>
                         <div class="form-group">
-                            <label for="editAddress">Address</label>
+                            <label for="location">Address</label>
                             <input type="text" class="form-control" id="editAddress" placeholder="Enter Address">
                         </div>
                         <div class="form-group">
-                            <label for="editGender">Gender</label>
+                            <label for="description">Gender</label>
                             <input type="text" class="form-control" id="editGender" placeholder="Enter Gender">
                         </div>
                         <p align="right" id="editMessage" class=""></p>
@@ -91,11 +95,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="updateButton" onclick="updateStudent()">Update Student</button>
+                    <button type="button" class="btn btn-primary" id="updateButton" onclick="">Update Student</button>
                 </div>
             </div>
         </div>
     </div>
-
 </body>
+
 </html>
