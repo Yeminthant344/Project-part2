@@ -8,8 +8,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("./public"));
 
-const { addStudent } = require('./utils/StudentUtil')
+const { addStudent, editStudent, viewStudent } = require('./utils/StudentUtil')
 app.post('/add-Student', addStudent);
+app.get('/view-Student', viewStudent);
+app.put('/edit-Student',editStudent);
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + "/public/" + startPage);

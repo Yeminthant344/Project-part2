@@ -62,6 +62,15 @@ async function editStudent(req, res) {
     }
 }
 
+async function viewStudent(req, res) {
+    try {
+        const allResources = await readJSON('utils/students.json');
+        return res.status(200).json(allResources);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
+
 module.exports = {
-    readJSON, writeJSON, addStudent,  editStudent
+    readJSON, writeJSON, addStudent,  editStudent , viewStudent
 };
