@@ -34,7 +34,7 @@ async function addStudent(req, res) {
     }
 }
 
-async function editStudent(req, res) {
+async function updateStudent(req, res) {
     try {
         const id = req.params.id;
         const name = req.body.name;
@@ -93,6 +93,6 @@ async function deleteStudent(req, res) {
     }
 }
 
-module.exports = {
-    readJSON, writeJSON, addStudent, editStudent, viewStudent , deleteStudent
+module.exports = {   readJSON, writeJSON, addStudent, editStudent, viewStudent , deleteStudent
+
 };
