@@ -39,40 +39,47 @@ function editStudent(data) {
     document.getElementById("editName").value = selectedStudent.name;
     document.getElementById("editAddress").value = selectedStudent.Address;
     document.getElementById("editGender").value = selectedStudent.Gender;
-    document.getElementById("updateButton").setAttribute("onclick", 'updateStudent("' +
-        selectedStudent.id + '")');
+
+    var updateButton = document.getElementById("updateButton");
+    updateButton.setAttribute("data-id", selectedStudent.id); 
     $('#editstudentModal').modal('show');
 }
 
-function updateStudent(id) {
-    console.log(id)
+
+function updateStudent() {
+    var studentId = document.getElementById("updateButton").getAttribute("data-id");
+
+    console.log(studentId); 
+
     var response = "";
     var jsonData = new Object();
-    jsonData.name = document.getElementById("name").value;
-    jsonData.Address = document.getElementById("Address").value;
-    jsonData.Gender = document.getElementById("Gender").value;
+    jsonData.name = document.getElementById("editName").value;
+    jsonData.Address = document.getElementById("editAddress").value;
+    jsonData.Gender = document.getElementById("editGender").value;
+
     if (jsonData.name == "" || jsonData.Address == "" || jsonData.Gender == "") {
         document.getElementById("editMessage").innerHTML = 'All fields are required!';
         document.getElementById("editMessage").setAttribute("class", "text-danger");
         return;
     }
+
     var request = new XMLHttpRequest();
-    request.open("PUT", "/edit-Student/" + id, true);
+    request.open("PUT", "/update-Student/" + studentId, true); 
     request.setRequestHeader('Content-Type', 'application/json');
     request.onload = function () {
         response = JSON.parse(request.responseText);
         if (response.message == "Student modified successfully!") {
             document.getElementById("editMessage").innerHTML = 'Edited Resource: ' + jsonData.name + '!';
             document.getElementById("editMessage").setAttribute("class", "text-success");
-            window.location.href = 'index.html';
-        }
-        else {
+            window.location.href = 'index.html';  
+        } else {
             document.getElementById("editMessage").innerHTML = 'Unable to edit student!';
             document.getElementById("editMessage").setAttribute("class", "text-danger");
         }
     };
     request.send(JSON.stringify(jsonData));
 }
+
 
 function viewStudent() {
     const searchValue = document.getElementById("searchInput").value.toLowerCase(); 

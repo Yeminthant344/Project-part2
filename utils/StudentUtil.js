@@ -34,7 +34,7 @@ async function addStudent(req, res) {
     }
 }
 
-async function editStudent(req, res) {
+async function updateStudent(req, res) {
     try {
         const id = req.params.id;
         const name = req.body.name;
@@ -72,5 +72,5 @@ async function viewStudent(req, res) {
 }
 
 module.exports = {
-    readJSON, writeJSON, addStudent,  editStudent , viewStudent
+    readJSON, writeJSON, addStudent,  updateStudent , viewStudent
 };
