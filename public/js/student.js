@@ -75,7 +75,7 @@ function updateStudent(id) {
 }
 
 function viewStudent() {
-    const searchValue = document.getElementById("searchInput").value.toLowerCase(); 
+    const searchValue = document.getElementById("searchInput").value.toLowerCase();
     var response = '';
     var request = new XMLHttpRequest();
     request.open('GET', '/view-Student', true);
@@ -85,7 +85,7 @@ function viewStudent() {
         response = JSON.parse(request.responseText);
         console.log(response);
 
-        const filteredStudents = response.filter(student => 
+        const filteredStudents = response.filter(student =>
             student.name.toLowerCase().includes(searchValue)
         );
 
@@ -102,11 +102,28 @@ function viewStudent() {
                 '<button type="button" class="btn btn-warning" onclick="editStudent(\'' + JSON.stringify(filteredStudents[i]).replace(/"/g, '&quot;') + '\')">Edit</button> ' +
 
 
-            '<button type="button" class="btn btn-danger" onclick="deleteStudent(' + response[i].id + ')"> Delete</button>' +
+                '<button type="button" class="btn btn-danger" onclick="deleteStudent(' + response[i].id + ')"> Delete</button>' +
                 '</td>' +
                 '</tr>'
         }
         document.getElementById('tableContent').innerHTML = html;
+    };
+    request.send();
+}
+
+function deleteStudent(selectedId) {
+    var response = "";
+    var request = new XMLHttpRequest();
+    request.open("DELETE", "/delete-Student/" + selectedId, true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.onload = function () {
+        response = JSON.parse(request.responseText);
+        if (response.message == "student deleted successfully!") {
+            window.location.href = 'index.html';
+        }
+        else {
+            alert('Unable to delete student!');
+        }
     };
     request.send();
 }
