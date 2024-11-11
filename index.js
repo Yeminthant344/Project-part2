@@ -8,10 +8,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("./public"));
 
-const { addStudent, updateStudent, viewStudent } = require('./utils/StudentUtil')
+const { addStudent, updateStudent, viewStudent, deleteStudent } = require('./utils/StudentUtil')
 app.post('/add-Student', addStudent);
 app.get('/view-Student', viewStudent);
 app.put('/update-Student/:id', updateStudent);
+app.delete('/delete-Student/:id', deleteStudent):
 
 
 app.get('/', (req, res) => {
