@@ -93,6 +93,6 @@ async function deleteStudent(req, res) {
     }
 }
 
-module.exports = {   readJSON, writeJSON, addStudent, editStudent, viewStudent , deleteStudent
+module.exports = {   readJSON, writeJSON, addStudent, updateStudent, viewStudent , deleteStudent
 
 };
