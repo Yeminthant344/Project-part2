@@ -8,13 +8,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("./public"));
 
-
-const { addStudent, editStudent, viewStudent,deleteStudent } = require('./utils/StudentUtil')
-app.post('/add-Student', addStudent);
-app.get('/view-Student', viewStudent);
-app.put('/edit-Student',editStudent);
-app.delete('/delete-Student/:id', deleteStudent)
-=======
 const { addStudent, updateStudent, viewStudent } = require('./utils/StudentUtil')
 app.post('/add-Student', addStudent);
 app.get('/view-Student', viewStudent);
