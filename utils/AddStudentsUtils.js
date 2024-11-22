@@ -5,35 +5,66 @@ async function readJSON(filename) {
     try {
         const data = await fs.readFile(filename, 'utf8');
         return JSON.parse(data);
-    } catch (err) { console.error(err); throw err; }
+    } catch (err) {
+        console.error('Error reading file:', err);
+        throw err;
+    }
 }
 
 async function writeJSON(object, filename) {
     try {
-        const allObjects = await readJSON(filename);
-        allObjects.push(object);
-        await fs.writeFile(filename, JSON.stringify(allObjects), 'utf8');
-        return allObjects;
-    } catch (err) { console.error(err); throw err; }
+        await fs.writeFile(filename, JSON.stringify(object, null, 2), 'utf8');
+    } catch (err) {
+        console.error('Error writing file:', err);
+        throw err;
+    }
 }
 
 async function addStudent(req, res) {
     try {
-        const name = req.body.name;
-        const Address = req.body.Address;
-        const Gender = req.body.Gender;
-
-        // Validation checks
-        if (Address.length < 6) {
-            return res.status(400).json({ message: 'Validation error: description too short' });
-        } else {
-            const newStudent = new Student(name, Address, Gender);
-            const updatedStudents = await writeJSON(newStudent, 'utils/students.json');
-            return res.status(201).json(updatedStudents);
+        const { name, address, gender } = req.body;
+        
+        // Comprehensive validation
+        if (!name || !address || !gender) {
+            return res.status(400).json({ message: 'Validation error' });
         }
+
+        // Detailed validations
+        if (name.length < 2 || name.length > 50) {
+            return res.status(400).json({ message: 'Validation error' });
+        }
+
+        if (address.length < 6 || address.length > 200) {
+            return res.status(400).json({ message: 'Validation error' });
+        }
+
+        if (!['Male', 'Female', 'Other'].includes(gender)) {
+            return res.status(400).json({ message: 'Validation error' });
+        }
+
+        // Logging for tracking
+        console.log(`Attempting to add student: ${name}, ${address}, ${gender}`);
+
+        const newStudent = {
+            id: Date.now().toString(),
+            name,
+            address,
+            gender
+        };
+
+        const allStudents = await readJSON('utils/students.json');
+        allStudents.push(newStudent);
+        
+        await writeJSON(allStudents, 'utils/students.json');
+        
+        return res.status(201).json(allStudents);
     } catch (error) {
-        return res.status(500).json({ message: error.message });
+        console.error('Comprehensive add student error:', error);
+        return res.status(500).json({ 
+            message: 'Server error during student addition', 
+            error: error.message 
+        });
     }
 }
 
-module.exports = { addStudent,readJSON, writeJSON, Student };
+module.exports = { addStudent, readJSON, writeJSON, Student };

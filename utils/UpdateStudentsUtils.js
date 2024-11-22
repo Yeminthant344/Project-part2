@@ -5,63 +5,79 @@ async function readJSON(filename) {
     try {
         const data = await fs.readFile(filename, 'utf8');
         return JSON.parse(data);
-    } catch (err) { console.error(err); throw err; }
+    } catch (err) {
+        console.error('Error reading file:', err);
+        throw err;
+    }
 }
 
 async function writeJSON(object, filename) {
     try {
-        const allObjects = await readJSON(filename);
-        allObjects.push(object);
-        await fs.writeFile(filename, JSON.stringify(allObjects), 'utf8');
-        return allObjects;
-    } catch (err) { console.error(err); throw err; }
+        await fs.writeFile(filename, JSON.stringify(object, null, 2), 'utf8');
+    } catch (err) {
+        console.error('Error writing file:', err);
+        throw err;
+    }
 }
 
 async function updateStudent(req, res) {
     try {
         const id = req.params.id;
-        const { name, Address, Gender } = req.body;
+        const { name, address, gender } = req.body;
 
-        // Validate fields server-side
-        // Name: only letters and spaces, length between 2 and 50 characters
-        if (!/^[A-Za-z\s]{2,50}$/.test(name)) {
-            return res.status(400).json({ message: 'Name must be between 2 and 50 characters and contain only letters and spaces!' });
+        // Comprehensive ID validation
+        if (!id || id.trim() === '') {
+            return res.status(400).json({ message: 'Valid student ID is required' });
         }
 
-        // Address: alphanumeric and between 5 and 200 characters
-        if (!/^[a-zA-Z0-9\s,.'-]{5,200}$/.test(Address)) {
-            return res.status(400).json({ message: 'Address must be alphanumeric and between 5 and 200 characters!' });
+        // Detailed field validations
+        if (!name || !address || !gender) {
+            return res.status(400).json({ message: 'All fields are required for update' });
         }
 
-        // Gender: must be "Male", "Female", or "Other"
-        if (!/^(Male|Female|Other)$/.test(Gender)) {
-            return res.status(400).json({ message: 'Gender must be one of the following: Male, Female, or Other!' });
+        if (name.length < 2 || name.length > 50) {
+            return res.status(400).json({ message: 'Name must be between 2-50 characters' });
         }
+
+        if (address.length < 6 || address.length > 200) {
+            return res.status(400).json({ message: 'Address must be between 6-200 characters' });
+        }
+
+        if (!['Male', 'Female', 'Other'].includes(gender)) {
+            return res.status(400).json({ message: 'Invalid gender selection' });
+        }
+
+        // Logging for tracking
+        console.log(`Attempting to update student with ID: ${id}`);
 
         const allStudents = await readJSON('utils/students.json');
-        let modified = false;
+        const studentIndex = allStudents.findIndex(student => student.id === id);
 
-        for (let i = 0; i < allStudents.length; i++) {
-            const currentStudent = allStudents[i];
-            if (currentStudent.id === id) {
-                // Update student fields
-                allStudents[i].name = name;
-                allStudents[i].Address = Address;
-                allStudents[i].Gender = Gender;
-                modified = true;
-            }
+        if (studentIndex === -1) {
+            return res.status(404).json({ message: 'Student not found' });
         }
 
-        if (modified) {
-            await fs.writeFile('utils/students.json', JSON.stringify(allStudents), 'utf8');
-            return res.status(201).json({ message: 'Student modified successfully!' });
-        } else {
-            return res.status(404).json({ message: 'Student not found!' });
-        }
+        // Update student details
+        allStudents[studentIndex] = {
+            id,
+            name,
+            address,
+            gender
+        };
 
+        await writeJSON(allStudents, 'utils/students.json');
+
+        return res.status(200).json({ 
+            message: 'Student updated successfully!', 
+            student: allStudents[studentIndex] 
+        });
     } catch (error) {
-        return res.status(500).json({ message: error.message });
+        console.error('Comprehensive update student error:', error);
+        return res.status(500).json({ 
+            message: 'Server error during student update', 
+            error: error.message 
+        });
     }
 }
 
-module.exports = { updateStudent, readJSON, writeJSON, Student};
+module.exports = { updateStudent, readJSON, writeJSON, Student };
