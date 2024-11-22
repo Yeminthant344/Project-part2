@@ -12,7 +12,7 @@ const { addStudent, updateStudent, viewStudent, deleteStudent } = require('./uti
 app.post('/add-Student', addStudent);
 app.get('/view-Student', viewStudent);
 app.put('/update-Student/:id', updateStudent);
-app.delete('/delete-Student/:id', deleteStudent):
+app.delete('/delete-Student/:id', deleteStudent);
 
 
 app.get('/', (req, res) => {
