@@ -25,7 +25,7 @@ async function deleteStudent(req, res) {
         const id = req.params.id;
 
         // Comprehensive ID validation
-        if (!id || id.trim() === '') {
+        if (!id || !(/^\d+$/.test(id))) {
             return res.status(400).json({ message: 'Valid student ID is required' });
         }
 
@@ -63,3 +63,30 @@ async function deleteStudent(req, res) {
 }
 
 module.exports = { deleteStudent, readJSON, writeJSON, Student };
+
+/*async function deleteStudent(req, res) {
+    try {
+        const id = req.params.id;
+        const allStudents = await readJSON('utils/students.json');
+        var index = -1;
+        for (var i = 0; i < allStudents.length; i++) {
+            var currentStudent = allStudents[i];
+            if (currentStudent.id == id)
+                index = i;
+        }
+        if (index != -1) {
+            allStudents.splice(index, 1);
+            await fs.writeFile('utils/students.json', JSON.stringify(allStudents), 'utf8');
+            return res.status(201).json({ message: 'Student deleted successfully!' });
+        } else {
+            return res.status(500).json({ message: 'Error occurred, unable to delete!' });
+        }
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
+
+module.exports = {
+    deleteStudent
+
+};*/
