@@ -4,7 +4,10 @@
         "html"
     ],
     "include": [
-        "utils/DeleteStudentsUtils.js"
+        "utils/DeleteStudentsUtils.js",
+        "utils/ReadStudentsUtils.js"
+
+
     ],
     "reportDir": "coverage/backend",
     "branches": 80,

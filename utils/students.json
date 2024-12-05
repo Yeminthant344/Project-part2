@@ -1,25 +1,14 @@
 [
   {
-    "id": "2",
-    "name": "Bob",
-    "age": 22
-  },
-  {
-    "id": "7331969064915",
-    "name": "Jonny Kim4",
-    "address": "kimm road",
+    "id": "1733361851217",
+    "name": "Anthony Kim",
+    "address": "Tamines street82",
     "gender": "Male"
   },
   {
-    "id": "",
-    "name": "Jonny Kim1",
-    "address": "kimm road",
-    "gender": "Male"
-  },
-  {
-    "id": "1733208478895",
-    "name": "Jonny Kim5",
-    "address": "kimm road",
+    "id": "1733361884765",
+    "name": "Babarosa Tan",
+    "address": "Tamines street82",
     "gender": "Male"
   }
 ]

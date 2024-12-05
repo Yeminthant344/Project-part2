@@ -27,7 +27,20 @@ describe('Resource API', () => {
     });
 
     let count = 0;
-    let studentId = '1733208480047';
+    let studentId = '1733361851217';
+
+    describe('GET /view-Student', () => {
+        it('should return all students', (done) => {
+            chai.request(baseUrl)
+                .get('/view-Student')
+                .end((err, res) => {
+                    count = res.body.length;
+                    expect(res).to.have.status(200);
+                    expect(res.body).to.be.an('array');
+                    done();
+                });
+        });
+    });
 
     describe(`DELETE /delete-Student/${studentId}`, () => {
         it('should delete an existing resource', (done) => {
