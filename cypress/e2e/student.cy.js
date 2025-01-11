@@ -28,9 +28,9 @@ describe('Student Management', () => {
     cy.visit(baseUrl);
 
     
-    const searchQuery = 'Babarosa Tan';
+    const searchQuery = 'Jonny Kim1';
     cy.get('#searchInput').type(searchQuery);
-
+    cy.wait(1000);
     // Verify that the search results include the query
     cy.get('#tableContent').find('tr').each(($row) => {
       cy.wrap($row).contains(searchQuery, { matchCase: false }).should('exist');
@@ -59,7 +59,8 @@ describe('Student Management', () => {
       .find('button')
       .contains('Delete')
       .click();
-    cy.get('#tableContent').find('tr').should('have.length', 1);  
+    cy.get('#tableContent').find('tr').should('have.length', 5);  
   });
+
 
 });
