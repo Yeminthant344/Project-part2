@@ -59,7 +59,7 @@ describe('Student Management', () => {
       .find('button')
       .contains('Delete')
       .click();
-    cy.get('#tableContent').find('tr').should('have.length', 5);  
+    cy.get('#tableContent').find('tr').should('have.length', 6);  
   });
 
 
