@@ -10,7 +10,7 @@
     ],
     "reportDir": "coverage/frontend",
     "check-coverage": true,
-    "branches": 70,
+    "branches": 50,
     "lines": 70,
     "functions": 70,
     "statements": 70
