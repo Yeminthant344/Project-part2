@@ -11,8 +11,8 @@
     ],
     "reportDir": "coverage/backend",
     "check-coverage": true,
-    "branches": 70,
+    "branches": 80,
     "lines": 70,
-    "functions": 70,
+    "functions": 100,
     "statements": 70
 }
