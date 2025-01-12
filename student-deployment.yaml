@@ -14,6 +14,8 @@ spec: # defines the desired state of the Deployment.
     spec: # specifies the container(s) to run
       containers:
       - name: student-container
-        image: Yeminthant344/rms-docker-img:latest
+        image: yeminthant344/student-docker-img:latest
         ports:
         - containerPort: 5050 # specifies the port that the application listens on
+      imagePullSecrets:
+      - name: regcred
