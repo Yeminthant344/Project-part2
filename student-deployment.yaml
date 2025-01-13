@@ -14,7 +14,7 @@ spec: # defines the desired state of the Deployment.
     spec: # specifies the container(s) to run
       containers:
       - name: student-container
-        image: yeminthant344/student-docker-img:latest
+        image: yeminthant344/student-docker-img:v3
         imagePullPolicy: Always
         ports:
         - containerPort: 5050 # specifies the port that the application listens on
