@@ -1,0 +1,9 @@
+services:
+  build-student:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: yeminthant344/student-docker-img:v3
+    container_name: student-docker-container
+    ports:
+      - "8000:5050"

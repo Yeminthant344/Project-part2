@@ -8,6 +8,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("./public"));
 
+const statusMonitor = require('express-status-monitor');
+app.use(statusMonitor());
+
 const { addStudent, updateStudent, viewStudent, deleteStudent } = require('./utils/StudentUtil')
 app.post('/add-Student', addStudent);
 app.get('/view-Student', viewStudent);

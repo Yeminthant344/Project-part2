@@ -1,0 +1,17 @@
+{
+    "reporter": [
+        "text",
+        "html"
+    ],
+    "include": [
+        " public/js/Readstudent.js",
+        " public/js/Deletestudent.js"
+
+    ],
+    "reportDir": "coverage/frontend",
+    "check-coverage": true,
+    "branches": 50,
+    "lines": 90,
+    "functions": 100,
+    "statements": 90
+}
