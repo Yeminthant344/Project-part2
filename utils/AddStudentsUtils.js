@@ -23,23 +23,23 @@ async function writeJSON(object, filename) {
 async function addStudent(req, res) {
     try {
         const { name, address, gender } = req.body;
-        
+
         // Comprehensive validation
         if (!name || !address || !gender) {
-            return res.status(400).json({ message: 'Validation error' });
+            return res.status(400).json({ message: 'Validation error, missing fields' });
         }
 
         // Detailed validations
-        if (name.length < 2 || name.length > 50) {
-            return res.status(400).json({ message: 'Validation error' });
+        if (name.length < 1 || name.length > 50) {
+            return res.status(400).json({ message: 'Validation error,name' });
         }
 
-        if (address.length < 6 || address.length > 200) {
-            return res.status(400).json({ message: 'Validation error' });
+        if (address.length < 1 || address.length > 200) {
+            return res.status(400).json({ message: 'Validation error,address' });
         }
 
         if (!['Male', 'Female', 'Other'].includes(gender)) {
-            return res.status(400).json({ message: 'Validation error' });
+            return res.status(400).json({ message: 'Validation error, gender' });
         }
 
         // Logging for tracking
@@ -54,15 +54,15 @@ async function addStudent(req, res) {
 
         const allStudents = await readJSON('utils/students.json');
         allStudents.push(newStudent);
-        
+
         await writeJSON(allStudents, 'utils/students.json');
-        
+
         return res.status(201).json(allStudents);
     } catch (error) {
         console.error('Comprehensive add student error:', error);
-        return res.status(500).json({ 
-            message: 'Server error during student addition', 
-            error: error.message 
+        return res.status(500).json({
+            message: 'Server error during student addition',
+            error: error.message
         });
     }
 }

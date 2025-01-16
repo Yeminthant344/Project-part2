@@ -10,18 +10,6 @@ async function readJSON(filename) {
     }
 }
 
-async function writeJSON(object, filename) {
-    try {
-        const allObjects = await readJSON(filename);
-        allObjects.push(object);
-        await fs.writeFile(filename, JSON.stringify(allObjects), 'utf8');
-        return allObjects;
-    } catch (err) { 
-        console.error(err); 
-        throw err; 
-    }
-}
-
 async function viewStudent(req, res) {
     try {
         const allResources = await readJSON('utils/students.json');
@@ -31,4 +19,4 @@ async function viewStudent(req, res) {
     }
 }
 
-module.exports = { readJSON, writeJSON, viewStudent };
+module.exports = { readJSON, viewStudent };

@@ -21,11 +21,12 @@ function viewStudent() {
                 '<td>' + filteredStudents[i].Gender + '</td>' +
                 '<td>' +
                 '<button type="button" class="btn btn-warning" onclick="editStudent(\'' + JSON.stringify(filteredStudents[i]).replace(/"/g, '&quot;') + '\')">Edit</button> ' +
-                '<button type="button" class="btn btn-danger" onclick="deleteStudent(' + response[i].id + ')"> Delete</button>' +
+                '<button type="button" class="btn btn-danger" onclick="deleteStudent(' + filteredStudents[i].id + ')"> Delete</button>' +
                 '</td>' +
                 '</tr>'
         }
         document.getElementById('tableContent').innerHTML = html;
+        console.log('Table content updated');
     };
     request.send();
 }
